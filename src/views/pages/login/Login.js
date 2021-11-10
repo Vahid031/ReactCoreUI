@@ -15,8 +15,37 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import { useState } from 'react'
+import AuthService from 'src/utilities/AuthService'
 
-const Login = () => {
+const Login = (props) => {
+
+  const [state, setState] = useState({
+                                        username: "",
+                                        password: ""
+                                      });
+
+
+    function  handleLogin(e) {
+      e.preventDefault();
+
+  
+        AuthService.login(state.username, state.password)
+        .then(() => {
+            props.history.push("/icon");
+            window.location.reload();
+          },
+          error => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+          }
+        );
+     
+    }
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -34,7 +63,7 @@ const Login = () => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" />
+                      <CInput type="text" placeholder="Username" autoComplete="username" onChange={(e) => setState({ ...state,username : e.target.value})}  value={state.username} />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -42,11 +71,11 @@ const Login = () => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" />
+                      <CInput type="password" placeholder="Password" autoComplete="current-password" onChange={(e) => setState({...state,password : e.target.value})} value={state.password} />
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4">Login</CButton>
+                        <CButton color="primary" className="px-4" onClick={(e) => handleLogin(e)}>Login</CButton>
                       </CCol>
                       <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>

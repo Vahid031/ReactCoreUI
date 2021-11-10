@@ -9,8 +9,8 @@ import {
   CHeaderNavLink,
   CSubheader,
   CBreadcrumbRouter,
-  CLink
-} from '@coreui/react'
+  CLink,
+  CSwitch} from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
 // routes config
@@ -66,6 +66,7 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
+      <CSwitch className={'mx-1'} variant={'3d'} color={'danger'} size={'lg'} onChange={(e) => document.getElementsByTagName('html')[0].setAttribute('dir', e.target.checked ? 'rtl': 'ltr')} />
         <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
         <TheHeaderDropdownMssg/>

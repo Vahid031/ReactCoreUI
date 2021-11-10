@@ -5,6 +5,8 @@ import {
   Switch
 } from 'react-router-dom'
 import { CContainer, CFade } from '@coreui/react'
+import AuthService from '../utilities/AuthService'
+
 
 // routes config
 import routes from '../routes'
@@ -16,6 +18,9 @@ const loading = (
 )
 
 const TheContent = () => {
+
+  const isLoggedIn = AuthService.isLoggedIn()
+
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -29,13 +34,17 @@ const TheContent = () => {
                   exact={route.exact}
                   name={route.name}
                   render={props => (
+                    !(route.requireAuth ?? false) || isLoggedIn  ? (
                     <CFade>
                       <route.component {...props} />
-                    </CFade>
+                    </CFade>) :
+                    (
+                      <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+                    )
                   )} />
               )
             })}
-            <Redirect from="/" to="/dashboard" />
+            {/* <Redirect from="/" to="/dashboard" /> */}
           </Switch>
         </Suspense>
       </CContainer>
