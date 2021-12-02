@@ -36,12 +36,12 @@ const Login = (props) => {
             window.location.reload();
           },
           error => {
-            const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
+            // const resMessage =
+            //   (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            //   error.message ||
+            //   error.toString();
           }
         );
      

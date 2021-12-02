@@ -10,6 +10,7 @@ import {
   } from '@coreui/react'
 import React, { Component } from 'react'
 import { Image } from 'react-bootstrap'
+import Test from 'src/components/Form/Test'
 
 export default class Album extends Component {
 constructor(){
@@ -33,7 +34,7 @@ this.state = {
     render() {
         return (
             <CRow>
-            <CCol sm="6">
+            {/* <CCol sm="6">
 
             <CCard>
                 <CCardBody>
@@ -53,6 +54,9 @@ this.state = {
                 </CCardBody>
             </CCard>
 
+            </CCol> */}
+            <CCol >
+                <Test />
             </CCol>
             </CRow>
         )

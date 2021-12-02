@@ -5,12 +5,12 @@ const TheFooter = () => {
   return (
     <CFooter fixed={false}>
       <div>
-        <a href="https://coreui.io" target="_blank" rel="noopener noreferrer">CoreUI</a>
-        <span className="ml-1">&copy; 2020 creativeLabs.</span>
+        <a href="http://Vahid031.ir" target="_blank" rel="noopener noreferrer">Vahid031</a>
+        <span className="ml-1">&copy; 2022 All Rights Reserved</span>
       </div>
       <div className="mfs-auto">
         <span className="mr-1">Powered by</span>
-        <a href="https://coreui.io/react" target="_blank" rel="noopener noreferrer">CoreUI for React</a>
+        <a href="http://Vahid031.ir" target="_blank" rel="noopener noreferrer">Vahid Goodarzi</a>
       </div>
     </CFooter>
   )

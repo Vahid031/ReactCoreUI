@@ -42,7 +42,7 @@ class AuthService {
 
     console.log(JSON.parse(localStorage.getItem('user')));
     // return false;
-  return  JSON.parse(localStorage.getItem('user')) != undefined;
+  return  JSON.parse(localStorage.getItem('user')) !== undefined;
   }
 }
 
