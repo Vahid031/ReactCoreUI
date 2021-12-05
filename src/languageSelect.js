@@ -13,15 +13,16 @@ const languageMap = {
   en: { label: "English", dir: "ltr", active: true },
   fa: { label: "فارسی", dir: "rtl", active: false },
   ar: { label: "العربية", dir: "rtl", active: false },
-  fr: { label: "Français", dir: "ltr", active: false },
+  // fr: { label: "Français", dir: "ltr", active: false },
 };
 
 const LanguageSelect = () => {
-  const selected = localStorage.getItem("i18nextLng") || "en";
+  const selected = localStorage.getItem("i18nextLng").substring(0,2) || "en";
   const { t } = useTranslation();
-
+ 
   const [menuAnchor, setMenuAnchor] = React.useState(null);
   React.useEffect(() => {
+    
     document.dir = languageMap[selected].dir;
     document.lang = selected;
   }, [menuAnchor, selected]);

@@ -14,7 +14,7 @@ function Test() {
         <Card elevation={6} className='px-5 pt-2 pb-4'>
             <LanguageSelect />
             <div className='card-title mb-4'>
-                {t("simple form")}
+                {t("this_is_an_example")}
             </div>
             <CustomInput />
         </Card>
