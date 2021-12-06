@@ -2,68 +2,58 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
-import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import Button from "@material-ui/core/Button";
-import Popover from "@material-ui/core/Popover";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListSubheader from "@material-ui/core/ListSubheader";
+import SimpleDialog from './components/dialogs/simpleDialog'
+
 
 const languageMap = {
   en: { label: "English", dir: "ltr", active: true },
   fa: { label: "فارسی", dir: "rtl", active: false },
-  ar: { label: "العربية", dir: "rtl", active: false },
-  // fr: { label: "Français", dir: "ltr", active: false },
 };
 
 const LanguageSelect = () => {
-  const selected = localStorage.getItem("i18nextLng").substring(0,2) || "en";
+
   const { t } = useTranslation();
+
+  const [open, setOpen] = React.useState(false)
+  const [selectedValue, setSelectedValue] = React.useState(localStorage.getItem("i18nextLng").substring(0,2) || "en")
  
-  const [menuAnchor, setMenuAnchor] = React.useState(null);
   React.useEffect(() => {
-    
-    document.dir = languageMap[selected].dir;
-    document.lang = selected;
-  }, [menuAnchor, selected]);
+
+    document.documentElement.dir = languageMap[selectedValue].dir;
+    document.documentElement.lang = selectedValue;
+  }, [open, selectedValue]);
+
+
+
+
+  const handleClose = (value) => {
+      setOpen(false)
+      i18next.changeLanguage(value);
+      setSelectedValue(value)
+  }
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
 
   return (
-    <div className="d-flex justify-content-end align-items-center language-select-root">
-      <Button onClick={({ currentTarget }) => setMenuAnchor(currentTarget)}>
-        {languageMap[selected].label}
-        <ArrowDropDown fontSize="small" />
-      </Button>
-      <Popover
-        open={!!menuAnchor}
-        anchorEl={menuAnchor}
-        onClose={() => setMenuAnchor(null)}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right"
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right"
-        }}
-      >
-        <div>
-          <List>
-            <ListSubheader>{t("select_language")}</ListSubheader>
-            {Object.keys(languageMap)?.map(item => (
-              <ListItem
-                button
-                key={item}
-                onClick={() => {
-                  i18next.changeLanguage(item);
-                  setMenuAnchor(null);
-                }}
-              >
-                {languageMap[item].label}
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      </Popover>
+    <div>
+        <Button
+                variant="outlined"
+                color="primary"
+                onClick={handleClickOpen}
+            >
+                {t("language")}
+            </Button>
+       <SimpleDialog
+                selectedValue={selectedValue}
+                items={{en : "English", fa : "فارسی"}}
+                title={t("language")}
+                open={open}
+                onClose={handleClose}
+            />
     </div>
   );
 };

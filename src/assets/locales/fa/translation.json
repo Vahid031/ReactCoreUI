@@ -1,5 +1,6 @@
 {
     "select_language": "انتخاب زبان",
+    "language": "زبان",
     "hello_welcome_to_react": "سلام خوش آمدید",
     "this_is_an_example": "این یک مثال است",
     "please_enter_name": "لطفا نام خود را وارد کنید"

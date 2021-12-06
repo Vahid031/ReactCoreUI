@@ -1,15 +1,15 @@
 import {
-    CCard,
-    CCardBody,
-    CCarousel,
-    CCarouselControl,
-    CCarouselInner,
-    CCarouselItem,
+    // CCard,
+    // CCardBody,
+    // CCarousel,
+    // CCarouselControl,
+    // CCarouselInner,
+    // CCarouselItem,
     CCol,
     CRow
   } from '@coreui/react'
 import React, { Component } from 'react'
-import { Image } from 'react-bootstrap'
+// import { Image } from 'react-bootstrap'
 import Test from 'src/components/Form/Test'
 
 export default class Album extends Component {

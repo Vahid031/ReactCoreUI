@@ -9,8 +9,7 @@ import {
   CHeaderNavLink,
   CSubheader,
   CBreadcrumbRouter,
-  CLink,
-  CSwitch} from '@coreui/react'
+  CLink} from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
 // routes config
@@ -22,6 +21,7 @@ import {
   TheHeaderDropdownNotif,
   TheHeaderDropdownTasks
 }  from './index'
+import LanguageSelect from 'src/languageSelect'
 
 const TheHeader = () => {
   const dispatch = useDispatch()
@@ -66,7 +66,7 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-      <CSwitch className={'mx-1'} variant={'3d'} color={'danger'} size={'lg'} onChange={(e) => document.getElementsByTagName('html')[0].setAttribute('dir', e.target.checked ? 'rtl': 'ltr')} />
+      <LanguageSelect />
         <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
         <TheHeaderDropdownMssg/>
