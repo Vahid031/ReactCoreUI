@@ -1,106 +1,184 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
 import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardGroup,
-  CCol,
-  CContainer,
-  CForm,
-  CInput,
-  CInputGroup,
-  CInputGroupPrepend,
-  CInputGroupText,
-  CRow
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { useState } from 'react'
+    Card,
+    Checkbox,
+    FormControlLabel,
+    Grid,
+    Button,
+    CircularProgress,
+} from '@material-ui/core'
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
+import { makeStyles } from '@material-ui/core/styles'
 import AuthService from 'src/utilities/AuthService'
+
+
+const useStyles = makeStyles(({ palette, ...theme }) => ({
+  cardHolder: {
+      background: '#1A2038',
+  },
+  card: {
+      maxWidth: 800,
+      borderRadius: 12,
+      margin: '1rem',
+  },
+  buttonProgress: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginTop: -12,
+      marginLeft: -12,
+  },
+}))
+
 
 const Login = (props) => {
 
-  const [state, setState] = useState({
-                                        username: "",
-                                        password: ""
-                                      });
+  const [loading, setLoading] = useState(false)
+  const [userInfo, setUserInfo] = useState({
+      email: 'jason@ui-lib.com',
+      password: 'dummyPass',
+  })
+  const [message, setMessage] = useState('')
+
+  const classes = useStyles()
+
+  const handleChange = ({ target: { name, value } }) => {
+      let temp = { ...userInfo }
+      temp[name] = value
+      setUserInfo(temp)
+  }
 
 
-    function  handleLogin(e) {
+    const handleFormSubmit = (e) => {
       e.preventDefault();
 
   
-        AuthService.login(state.username, state.password)
+        AuthService.login(userInfo.email, userInfo.password)
         .then(() => {
-            props.history.push("/icon");
+            props.history.push("/");
             window.location.reload();
           },
           error => {
-            // const resMessage =
-            //   (error.response &&
-            //     error.response.data &&
-            //     error.response.data.message) ||
-            //   error.message ||
-            //   error.toString();
+            console.log(error)
+            setMessage(error.message)
+            setLoading(false)
           }
         );
      
     }
   return (
-    <div className="c-app c-default-layout flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md="8">
-            <CCardGroup>
-              <CCard className="p-4">
-                <CCardBody>
-                  <CForm>
-                    <h1>Login</h1>
-                    <p className="text-muted">Sign In to your account</p>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                        <CInputGroupText>
-                          <CIcon name="cil-user" />
-                        </CInputGroupText>
-                      </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" onChange={(e) => setState({ ...state,username : e.target.value})}  value={state.username} />
-                    </CInputGroup>
-                    <CInputGroup className="mb-4">
-                      <CInputGroupPrepend>
-                        <CInputGroupText>
-                          <CIcon name="cil-lock-locked" />
-                        </CInputGroupText>
-                      </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" onChange={(e) => setState({...state,password : e.target.value})} value={state.password} />
-                    </CInputGroup>
-                    <CRow>
-                      <CCol xs="6">
-                        <CButton color="primary" className="px-4" onClick={(e) => handleLogin(e)}>Login</CButton>
-                      </CCol>
-                      <CCol xs="6" className="text-right">
-                        <CButton color="link" className="px-0">Forgot password?</CButton>
-                      </CCol>
-                    </CRow>
-                  </CForm>
-                </CCardBody>
-              </CCard>
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
-                    </Link>
-                  </div>
-                </CCardBody>
-              </CCard>
-            </CCardGroup>
-          </CCol>
-        </CRow>
-      </CContainer>
-    </div>
+    <div className={classes.card + ' flex justify-center items-center  min-h-full-screen '}>
+    <Card className={classes.card}>
+        <Grid container>
+            <Grid item lg={5} md={5} sm={5} xs={12}>
+                <div className="p-8 flex justify-center items-center h-full">
+                    <img
+                        className="w-200"
+                        src="/assets/images/illustrations/dreamer.svg"
+                        alt=""
+                    />
+                </div>
+            </Grid>
+            <Grid item lg={7} md={7} sm={7} xs={12}>
+                <div className="p-8 h-full bg-light-gray relative">
+                    <ValidatorForm onSubmit={handleFormSubmit}>
+                        <TextValidator
+                            className="mb-6 w-full"
+                            variant="outlined"
+                            size="small"
+                            label="Email"
+                            onChange={handleChange}
+                            type="email"
+                            name="email"
+                            value={userInfo.email}
+                            validators={['required', 'isEmail']}
+                            errorMessages={[
+                                'this field is required',
+                                'email is not valid',
+                            ]}
+                        />
+                        <TextValidator
+                            className="mb-3 w-full"
+                            label="Password"
+                            variant="outlined"
+                            size="small"
+                            onChange={handleChange}
+                            name="password"
+                            type="password"
+                            value={userInfo.password}
+                            validators={['required']}
+                            errorMessages={['this field is required']}
+                        />
+                        <FormControlLabel
+                            className="mb-3 min-w-288"
+                            name="agreement"
+                            onChange={handleChange}
+                            control={
+                                <Checkbox
+                                    size="small"
+                                    onChange={({
+                                        target: { checked },
+                                    }) =>
+                                        handleChange({
+                                            target: {
+                                                name: 'agreement',
+                                                value: checked,
+                                            },
+                                        })
+                                    }
+                                    checked={userInfo.agreement || true}
+                                />
+                            }
+                            label="Remeber me"
+                        />
+
+                        {message && (
+                            <p className="text-error">{message}</p>
+                        )}
+
+                        <div className="flex flex-wrap items-center mb-4">
+                            <div className="relative">
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    disabled={loading}
+                                    type="submit"
+                                >
+                                    Sign in
+                                </Button>
+                                {loading && (
+                                    <CircularProgress
+                                        size={24}
+                                        className={
+                                            classes.buttonProgress
+                                        }
+                                    />
+                                )}
+                            </div>
+                            <span className="mr-2 ml-5">or</span>
+                            <Button
+                                className="capitalize"
+                                // onClick={() =>
+                                    // history.push('/session/signup')
+                                // }
+                            >
+                                Sign up
+                            </Button>
+                        </div>
+                        <Button
+                            className="text-primary"
+                            // onClick={() =>
+                            //     history.push('/session/forgot-password')
+                            // }
+                        >
+                            Forgot password?
+                        </Button>
+                    </ValidatorForm>
+                </div>
+            </Grid>
+        </Grid>
+    </Card>
+</div>
   )
 }
 
