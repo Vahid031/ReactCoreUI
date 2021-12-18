@@ -7,3 +7,18 @@
 
 
 
+@font-face {
+    font-family: 'IranSans';
+    font-style: normal;
+    // font-weight: 400;
+    src: url('../assets/fonts/iransans/regular-iransans.eot'); /* IE9 Compat Modes */
+    src: local('IranSans'), local('IranSans'),
+         url('../assets/fonts/iransans/regular-iransans.eot') format('embedded-opentype'), /* IE6-IE8 */
+         url('../assets/fonts/iransans/regular-iransans.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../assets/fonts/iransans/regular-iransans.woff') format('woff'), /* Modern Browsers */
+         url('../assets/fonts/iransans/regular-iransans.ttf') format('truetype') /* Safari, Android, iOS */
+  }
+  
+  html[lang='fa'] body {
+    font-family: IranSans;
+  }

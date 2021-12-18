@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import ImageGallery from "react-image-gallery";
-import { Fastfood } from "@material-ui/icons";
+import {Instagram} from 'react-content-loader'
 
 const Gallery = () => {
   const [images, setImages] = React.useState(null);
@@ -77,7 +77,7 @@ const Gallery = () => {
   slideOnThumbnailOver={state.slideOnThumbnailOver}
   additionalClass="app-image-gallery"
   useWindowKeyDown={state.useWindowKeyDown} 
-  /> : null;
+  /> : <Instagram />;
 };
 
 

@@ -22,6 +22,7 @@ import {
   TheHeaderDropdownTasks
 }  from './index'
 import LanguageSelect from 'src/languageSelect'
+import { useTranslation } from 'react-i18next'
 
 const TheHeader = () => {
   const dispatch = useDispatch()
@@ -36,6 +37,8 @@ const TheHeader = () => {
     const val = [false, 'responsive'].includes(sidebarShow) ? true : 'responsive'
     dispatch({type: 'set', sidebarShow: val})
   }
+
+  const {t} = useTranslation();
 
   return (
     <CHeader withSubheader>
@@ -55,13 +58,13 @@ const TheHeader = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
+          <CHeaderNavLink to="/dashboard">{t('Dashboard')}</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/users">Users</CHeaderNavLink>
+          <CHeaderNavLink to="/users">{t('Users')}</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink>Settings</CHeaderNavLink>
+          <CHeaderNavLink>{t('Settings')}</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 

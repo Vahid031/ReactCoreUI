@@ -11,15 +11,25 @@ import {
   CSidebarNavDropdown,
   CSidebarNavItem,
 } from '@coreui/react'
+import '../assets/fonts/iransans/regular-iransans.ttf'
 
 import CIcon from '@coreui/icons-react'
 
 // sidebar nav config
 import navigation from './_nav'
+import { useTranslation } from 'react-i18next'
+
+
 
 const TheSidebar = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
+  const {t} = useTranslation();
+
+  navigation.map(item =>
+    {
+      item.name = t(item.title);
+    })
 
   return (
     <CSidebar

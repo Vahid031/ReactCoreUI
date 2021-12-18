@@ -4,11 +4,11 @@ import CIcon from '@coreui/icons-react'
 const _nav =  [
   {
     _tag: 'CSidebarNavItem',
-    name: 'آلبوم خاطرات',
+    title:"Gallery",
     to: '/album',
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    icon: <CIcon name="cil-list" customClasses="c-sidebar-nav-icon"/>,
     badge: {
-      color: 'danger',
+      color: 'success',
       text: 'NEW',
     }
   },
