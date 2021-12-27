@@ -3,14 +3,22 @@ import CIcon from '@coreui/icons-react'
 
 const _nav =  [
   {
-    _tag: 'CSidebarNavItem',
-    title:"Gallery",
+    _tag: 'CSidebarNavDropdown',
+    key:"Gallery",
     to: '/album',
     icon: <CIcon name="cil-list" customClasses="c-sidebar-nav-icon"/>,
     badge: {
       color: 'success',
       text: 'NEW',
-    }
+    },
+    _children: [
+          {
+            _tag: 'CSidebarNavItem',
+            key: 'MarriageDay',
+            to: '/album',
+            icon: 'cil-pencil',
+          },
+        ]
   },
   // {
   //   _tag: 'CSidebarNavItem',

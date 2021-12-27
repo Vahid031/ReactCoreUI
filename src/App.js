@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import i18n from './i18nextConf';
 import './scss/style.scss';
 
 const loading = (
@@ -18,6 +19,12 @@ const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 
 class App extends Component {
+
+constructor(props){
+super(props);
+
+i18n.changeLanguage('en')
+}
 
   render() {
     return (

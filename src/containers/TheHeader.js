@@ -5,8 +5,8 @@ import {
   CToggler,
   CHeaderBrand,
   CHeaderNav,
-  CHeaderNavItem,
-  CHeaderNavLink,
+  // CHeaderNavItem,
+  // CHeaderNavLink,
   CSubheader,
   CBreadcrumbRouter,
   CLink} from '@coreui/react'
@@ -16,12 +16,13 @@ import CIcon from '@coreui/icons-react'
 import routes from '../routes'
 
 import { 
-  TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
+  // TheHeaderDropdown,
+  // TheHeaderDropdownMssg,
+  // TheHeaderDropdownNotif,
+  // TheHeaderDropdownTasks,
+  TheHeaderDropdownLang
 }  from './index'
-import LanguageSelect from 'src/languageSelect'
+
 import { useTranslation } from 'react-i18next'
 
 const TheHeader = () => {
@@ -40,6 +41,13 @@ const TheHeader = () => {
 
   const {t} = useTranslation();
 
+
+  
+  routes.map(item =>
+    {
+      item.name = t(item.key);
+    });
+
   return (
     <CHeader withSubheader>
       <CToggler
@@ -57,7 +65,7 @@ const TheHeader = () => {
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
-        <CHeaderNavItem className="px-3" >
+        {/* <CHeaderNavItem className="px-3" >
           <CHeaderNavLink to="/dashboard">{t('Dashboard')}</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem  className="px-3">
@@ -65,15 +73,15 @@ const TheHeader = () => {
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink>{t('Settings')}</CHeaderNavLink>
-        </CHeaderNavItem>
+        </CHeaderNavItem> */}
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-      <LanguageSelect />
-        <TheHeaderDropdownNotif/>
+        <TheHeaderDropdownLang/>
+        {/* <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/>
-        <TheHeaderDropdown/>
+        <TheHeaderDropdownMssg/> 
+        <TheHeaderDropdown/> */}
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">
@@ -90,10 +98,10 @@ const TheHeader = () => {
               aria-current="page" 
               to="/dashboard"
             >
-              <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
+              <CIcon name="cil-graph" alt="Dashboard" />&nbsp;{t("Dashboard")}
             </CLink>
             <CLink className="c-subheader-nav-link" href="#">
-              <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
+              <CIcon name="cil-settings" alt="Settings" />&nbsp;{t("Settings")}
             </CLink>
           </div>
       </CSubheader>

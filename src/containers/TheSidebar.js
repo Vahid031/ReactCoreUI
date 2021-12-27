@@ -11,14 +11,12 @@ import {
   CSidebarNavDropdown,
   CSidebarNavItem,
 } from '@coreui/react'
-import '../assets/fonts/iransans/regular-iransans.ttf'
 
 import CIcon from '@coreui/icons-react'
 
 // sidebar nav config
 import navigation from './_nav'
 import { useTranslation } from 'react-i18next'
-
 
 
 const TheSidebar = () => {
@@ -28,9 +26,14 @@ const TheSidebar = () => {
 
   navigation.map(item =>
     {
-      item.name = t(item.title);
+      item.name = t(item.key);
+
+      item._children.map(child =>{
+        child.name = t(child.key);
+      });
     })
 
+    
   return (
     <CSidebar
       show={show}
